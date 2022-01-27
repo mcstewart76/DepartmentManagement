@@ -1,0 +1,26 @@
+{
+  "name": "departmentmanagement",
+  "version": "1.0.0",
+  "description": "A command line application to view or edit departments, roles, employees.  ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcstewart76/DepartmentManagement.git"
+  },
+  "author": "Michael C. Stewart",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.17.2",
+    "mysql2": "2.3.3",
+    "inquirer": "8.2.0",
+    "console.table":"0.10.0"
+  },
+  "bugs": {
+    "url": "https://github.com/mcstewart76/DepartmentManagement/issues"
+  },
+  "homepage": "https://github.com/mcstewart76/DepartmentManagement#readme"
+}
