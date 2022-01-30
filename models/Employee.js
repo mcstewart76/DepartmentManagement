@@ -12,16 +12,16 @@ Employee.init(
         autoIncrement: true,
       },
       first_name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
-        len: [30]
+        
       },
       last_name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
-        len: [30]
+        
       },
-      roles_id: {
+      role_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

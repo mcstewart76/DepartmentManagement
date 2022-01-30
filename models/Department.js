@@ -10,10 +10,10 @@ Department.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-      len: [30]
+      
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(30),
       allowNull: false,
     },
     

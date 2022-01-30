@@ -12,9 +12,9 @@ Role.init(
         autoIncrement: true,
       },
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
-        len: [30]
+        
       },
       salary: {
         type: DataTypes.DECIMAL,
