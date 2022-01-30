@@ -23,8 +23,10 @@ Role.init(
       department_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        foreignKey: true,
-        references: true,
+        references: {
+          model: 'department',
+          key: 'id',
+        },
       },
      
     },
