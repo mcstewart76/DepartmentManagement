@@ -71,4 +71,5 @@ function  serverStart() {
     }
     runner();
 
+    module.exports = {initialQuestions}
   
