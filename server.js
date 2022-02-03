@@ -16,7 +16,7 @@ const inquirer = require('inquirer');
 // For seeding only
 const Employee = require('./models/Employee');
 const Department = require('./models/Department');
-
+const Role = require('./models/Role');
 const seedDepartmentData = require('./seeds/departmentSeedData.json');
 
 
@@ -84,10 +84,7 @@ const seedDatabase = () => {
                   case "Add Department":
                   
                    addDepartment(); 
-                  
-                  
-                  
-                  
+          
                     break;
                   case "Quit":
                     console.log("\n Goodbye! \n")
@@ -123,20 +120,36 @@ const seedDatabase = () => {
 // // %% App Questions %%
 // /////////////////////////////////////////////////////
   function addRole() {
-    inquirer
-      .prompt(question.addRolePrompt())
-        .then(function(data) {
-            
-            //console.log(data['departmentName'])
-            //add to schema here
-              console.log(data.roleName)
-              console.log(data.roleSalary)
-              //query departments
-              console.log(data.roleDepartment)
-            
-        })
+    
+       sequelize.query('SELECT id, name FROM management_db.department', {model : Department}).then(function(departments){
+        let departmentChoices = [];
+        for (var x = 0; x < departments.length; x++) {
+          departmentChoices.push({name: `${departments[x].dataValues.name}`, value: departments[x].dataValues.id})
+        // let departmentChoices = {name: departments[x].dataValues.name, value: departments[x].dataValues.id};
+      }
         
-  };
+        //{name: `${res[i].name}`, value: res[i].id}{name:`${departments.dataValues.name}`, value: `${departments.dataValues.id}`}
+        console.log(departmentChoices);
+        question.addRole[2].choices = departmentChoices
+       });
+                inquirer
+                  .prompt(question.addRole)
+                    .then(function(data) {
+                        
+                        //add to schema here
+                        Role.create({
+                    
+                          "title": data.roleName,
+                          "salary": data.roleSalary,
+                          "department_id": data.roleDepartment
+                      })
+                        
+                    }).then(function(){
+                      initialQuestions();
+                    })
+                   
+  };    
+  
 
 //Add Department Function
   function addDepartment () {
@@ -154,27 +167,20 @@ const seedDatabase = () => {
                     "name": data.departmentName
                     
                 })
-                
-        //     }).then(function(){
-        //      return  
-        //     })
-            
-
-              
-            
+      
         }).then(function(){
           initialQuestions();
         })
       
   };
   
-}
+}//End of initial Questions function
 const runner = async () => {
     //const serverStarter = await serverStart();
     seedDatabase();
     console.log("\n\n\n")
     console.log("Initilizing Application!")
     const docmake = await initialQuestions();
-    console.log(docmake)
+    
     }
     runner();
