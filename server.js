@@ -1,62 +1,32 @@
-//const express = require('express');
 const sequelize = require('./config/connection');
 const inquirer = require('inquirer');
-//const connector = require('sequelize');
-//const mysql = require('mysql2')
 
 
-
-//Imports functions from other files
+//Imports questions from other file
  const question = require('./lib/questions');
-// const adding = require('./lib/adding')
-// const view = require('./lib/views');
-
- const models = require('./models');
 
 // For seeding only
+const models = require('./models');
 const Employee = require('./models/Employee');
 const Department = require('./models/Department');
 const Role = require('./models/Role');
 const seedDepartmentData = require('./seeds/departmentSeedData.json');
+const roleSeedData = require('./seeds/roleSeedData.json');
+const employeeSeedData = require('./seeds/employeeSeedData.json')
 
-
-
-
-//const mysql = require('mysql2');
-//const app = express();
-//const PORT = process.env.PORT || 3001;
-
-
-//app.use(express.urlencoded({ extended: true }));
-//app.use(express.json());
-
-const seedDatabase = () => {
-  return sequelize.sync({ force: true }).then(() => {
+//Seeds Database
+function seedDatabase  () {
+   return sequelize.sync({ force: true }).then(() => {
     Department.bulkCreate(seedDepartmentData)
+    Role.bulkCreate(roleSeedData)
+    Employee.bulkCreate(employeeSeedData)
   })
 };
-  // sequelize.sync({ force: true })
-  //  .then(() => {
-  // // Department.bulkCreate(seedData).then(() =>{
-  //  //app.listen(PORT, () => console.log('Now listening on ' + PORT)); 
- // Department.bulkCreate(seedDepartmentData)
-   
-  // }) 
-
-  
-
-
-
-
-
-  
+ 
 //////////////////////////////////////////////////////////////////////
 // % App Starter %
 //////////////////////////////////////////////////////////////////////
 
-// initialQuestions();
-
-  
   const initialQuestions =async() =>{
     return inquirer
        .prompt(question.startupQuestion)
@@ -95,30 +65,29 @@ const seedDatabase = () => {
         
           })
 
-
-  
-  
-
- 
-  //   // const seedDatabase = () => {
-  //   // return  sequelize.sync({ force: false }).then(() => {
-  //   //     })
-  //   //    .then(() => {
-  //   //       console.log("Completed Department Seeding")
-  //   //    Department.bulkCreate(seedData)
-      
-  //   //    });
-      
-  //   // // }
-  
-  
-
-
-// //module.exports = {initialQuestions}
-
 // // ///////////////////////////////////////////////////////
 // // %% App Questions %%
 // /////////////////////////////////////////////////////
+//Add Department Function
+  function addDepartment () {
+    inquirer
+    .prompt(question.addDepartment)
+        .then(function(data) {
+            console.log(data.departmentName + ' was added!')
+
+                Department.create({
+        
+                    "name": data.departmentName
+                    
+                })
+      
+        }).then(function(){
+          initialQuestions();
+        })
+      
+  };
+
+  // Add Role Function
   function addRole() {
     
        sequelize.query('SELECT id, name FROM management_db.department', {model : Department}).then(function(departments){
@@ -149,34 +118,72 @@ const seedDatabase = () => {
                     })
                    
   };    
-  
+  // Add Employee Function
 
-//Add Department Function
-  function addDepartment () {
-    inquirer
-    .prompt(question.addDepartment)
-        .then(function(data) {
-            console.log(data.departmentName + ' was added!')
-        //     console.log(data['departmentName'])
-        //    // add to schema here
-        //     sequelize.sync({
-        //         force: false
-        //     }).then(function(){
-                Department.create({
-        
-                    "name": data.departmentName
-                    
-                })
+  function addEmployee() {
+    
+    sequelize.query('SELECT id, title FROM management_db.role', {model : Employee}).then(function(roles){
+     let roleChoices = [];
+     for (var x = 0; x < roles.length; x++) {
+       roleChoices.push({name: `${roles[x].dataValues.title}`, value: roles[x].dataValues.id})
+     // let departmentChoices = {name: departments[x].dataValues.name, value: departments[x].dataValues.id};
+   }
+     
+     //{name: `${res[i].name}`, value: res[i].id}{name:`${departments.dataValues.name}`, value: `${departments.dataValues.id}`}
+    // console.log(departmentChoices);
+     question.addEmployee[2].choices = roleChoices
+    });
+    sequelize.query('SELECT first_name, last_name, id FROM management_db.employee WHERE manager_id IS NULL', {model : Employee}).then(function(managers){
+      let managerChoices = [{name: "None", value: null }];
+      for (var x = 0; x < managers.length; x++) {
+        managerChoices.push({name: `${managers[x].dataValues.first_name} ${managers[x].dataValues.last_name}`, value: managers[x].dataValues.id})
+      // let departmentChoices = {name: departments[x].dataValues.name, value: departments[x].dataValues.id};
+    }
+    
       
-        }).then(function(){
-          initialQuestions();
-        })
-      
-  };
+      //{name: `${res[i].name}`, value: res[i].id}{name:`${departments.dataValues.name}`, value: `${departments.dataValues.id}`}
+     // console.log(departmentChoices);
+      question.addEmployee[3].choices = managerChoices
+     
+    });
+             inquirer
+               .prompt(question.addEmployee)
+                 .then(function(data) {
+                     if(data.employeeManager == null){
+                       Employee.create({
+                 
+                       "first_name": data.employeeFirstName,
+                       "last_name": data.employeeLastName,
+                       "role_id": data.employeeRole,
+                      // "manager_id": null,
+
+                      
+                       
+                   }) 
+                     }else{
+                      Employee.create({
+                 
+                        "first_name": data.employeeFirstName,
+                        "last_name": data.employeeLastName,
+                        "role_id": data.employeeRole,
+                       
+                        "manager_id": data.employeeManager 
+                      })
+                    }
+                     //add to schema here
+                     
+                     
+                 }).then(function(){
+                   initialQuestions();
+                 })
+                
+};    
+
+
+
   
 }//End of initial Questions function
 const runner = async () => {
-    //const serverStarter = await serverStart();
     seedDatabase();
     console.log("\n\n\n")
     console.log("Initilizing Application!")
