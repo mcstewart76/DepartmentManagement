@@ -140,7 +140,6 @@ function seedDatabase  () {
       // let departmentChoices = {name: departments[x].dataValues.name, value: departments[x].dataValues.id};
     }
     
-      
       //{name: `${res[i].name}`, value: res[i].id}{name:`${departments.dataValues.name}`, value: `${departments.dataValues.id}`}
      // console.log(departmentChoices);
       question.addEmployee[3].choices = managerChoices
@@ -156,9 +155,7 @@ function seedDatabase  () {
                        "last_name": data.employeeLastName,
                        "role_id": data.employeeRole,
                       // "manager_id": null,
-
-                      
-                       
+     
                    }) 
                      }else{
                       Employee.create({
@@ -171,23 +168,84 @@ function seedDatabase  () {
                       })
                     }
                      //add to schema here
-                     
-                     
+ 
                  }).then(function(){
                    initialQuestions();
                  })
                 
-};    
+  };   
+  //Update Employee Function
+  function updateEmployee(){
+    sequelize.query('SELECT first_name, last_name, id FROM management_db.employee', {model : Employee}).then(function(employees){
+      let employeeChoices = [];
+      for (var x = 0; x < employees.length; x++) {
+        employeeChoices.push({name: `${employees[x].dataValues.first_name} ${employees[x].dataValues.last_name}`, value: employees[x].dataValues.id})
+      // let departmentChoices = {name: departments[x].dataValues.name, value: departments[x].dataValues.id};
+    }
+      
+     question.employeeUpdate[0].choices = employeeChoices;
+     });
+              inquirer
+                .prompt(question.employeeUpdate)
+                  .then(function(data) {
+                      console.log(data)
+                      //add to schema here
+                    //   Employee.update(
+                    //     {where: {
+                    //       "first_name": fafdsa,
+                    //       "last_name": lsat,
+                    //     }},
+                    //     {
+                    //     "role_id": data.employeeRoleSelect
+                        
+                    // })
+                      
+                  }).then(function(){
+                    initialQuestions();
+                  })
+  }
 
+  //View Departments Function
+   function viewDepartments(){
+    sequelize.query("SELECT name FROM management_db.department", { type: sequelize.QueryTypes.SELECT}).then(function(departments){
+      console.log("\n\n\n")
+      console.table(departments)
+      console.log("\n")
+    });
+     initialQuestions();
+   };
+  //View Employees Function
+  function viewEmployees(){
+      let queryText = `SELECT e.first_name, e.last_name, r.title, r.salary, d.name as department, m.first_name as Manager_first_name, m.last_name as  Manager_last_name
+      FROM employee as e
+      JOIN role r ON e.role_id = r.id
+      JOIN department d ON r.department_id = d.id
+      LEFT JOIN employee m ON e.manager_id = m.id;`;
+  sequelize.query(queryText, { type: sequelize.QueryTypes.SELECT}).then(function(employees){
+    console.log("\n\n\n")
+    console.table(employees)
+    console.log("\n")
+  });
+      initialQuestions();
+   }
+  //View Roles Function
+  function viewRoles(){
+    let queryTitle = `SELECT title FROM role`;
+  sequelize.query(queryTitle, { type: sequelize.QueryTypes.SELECT}).then(function(roles){
+  console.log("\n\n\n")
+  console.table(roles)
+  console.log("\n")
+});
+    initialQuestions();
+ }
 
-
-  
 }//End of initial Questions function
 const runner = async () => {
     seedDatabase();
     console.log("\n\n\n")
     console.log("Initilizing Application!")
     const docmake = await initialQuestions();
+    
     
     }
     runner();
