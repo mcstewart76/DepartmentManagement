@@ -27,7 +27,7 @@ function seedDatabase  () {
 // % App Starter %
 //////////////////////////////////////////////////////////////////////
 
-  const initialQuestions =async() =>{
+  const initialQuestions = async() =>{
     return inquirer
        .prompt(question.startupQuestion)
           .then(function(data) {
@@ -176,24 +176,31 @@ function seedDatabase  () {
   };   
   //Update Employee Function
   function updateEmployee(){
-    sequelize.query('SELECT first_name, last_name, id FROM management_db.employee', {model : Employee}).then(function(employees){
+      sequelize.query("SELECT first_name, last_name, id FROM management_db.employee", { type: sequelize.QueryTypes.SELECT}).then(function(emp){
       let employeeChoices = [];
-      for (var x = 0; x < employees.length; x++) {
-        employeeChoices.push({name: `${employees[x].dataValues.first_name} ${employees[x].dataValues.last_name}`, value: employees[x].dataValues.id})
-      // let departmentChoices = {name: departments[x].dataValues.name, value: departments[x].dataValues.id};
-    }
-      
+      for (var x = 0; x < emp.length; x++) {
+        employeeChoices.push({name: `${emp[x].first_name} ${emp[x].last_name}`, value: emp[x].id})
+    }; 
      question.employeeUpdate[0].choices = employeeChoices;
      });
-              inquirer
+     sequelize.query("SELECT title, id FROM management_db.role", { type: sequelize.QueryTypes.SELECT}).then(function(rol){
+      let rolChoices = [];
+      for (var x = 0; x < rol.length; x++) {
+        rolChoices.push({name: rol[x].title, value: rol[x].id})
+    }; 
+     question.employeeUpdate[1].choices = rolChoices;
+     }).then(function(){
+          inquirer
                 .prompt(question.employeeUpdate)
                   .then(function(data) {
-                      console.log(data)
+                      //console.log(data)
                       //add to schema here
+                      sequelize.query(`UPDATE employee SET role_id = ${data.employeeRoleSelect} WHERE id = ${data.employeeList}`, { type: sequelize.QueryTypes.UPDATE})
+
                     //   Employee.update(
                     //     {where: {
-                    //       "first_name": fafdsa,
-                    //       "last_name": lsat,
+                    //       "id": data.employeeList,
+                          
                     //     }},
                     //     {
                     //     "role_id": data.employeeRoleSelect
@@ -203,7 +210,9 @@ function seedDatabase  () {
                   }).then(function(){
                     initialQuestions();
                   })
-  }
+     })
+              
+  };
 
   //View Departments Function
    function viewDepartments(){

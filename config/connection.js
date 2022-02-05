@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-//const mysql = require('mysql2');
 
 require('dotenv').config();
 
@@ -23,16 +22,6 @@ if (process.env.MYSQL_URL) {
     
   );
 }
-// const mysql = require("mysql2");
-// const connection = mysql.createConnection(
-//     {
-//       host: 'localhost',
-//       user: 'root',
-//       password: 'rooter',
-//       database: 'management_db'
-//     },
-//     console.log(`Connected to the management database.`)
-//   );
 
   module.exports = sequelize;
 
