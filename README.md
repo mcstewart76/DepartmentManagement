@@ -31,7 +31,7 @@ N/A
 
 
 ## Github
-Check out my GitHub at[(https://github.com/mcstewart76/DepartmentManagement)]. 
+Check out my GitHub at[https://github.com/mcstewart76/DepartmentManagement](https://github.com/mcstewart76/DepartmentManagement). 
 
 ## Email
 Contact me at <a href="MAILTO:mcstewart76@gmail.com">mcstewart76@gmail.com</a> if you have additional questions. 
