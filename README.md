@@ -37,10 +37,10 @@ Check out my GitHub at [https://github.com/mcstewart76/DepartmentManagement](htt
 Contact me at <a href="MAILTO:mcstewart76@gmail.com">mcstewart76@gmail.com</a> if you have additional questions. 
 
 ## License
-! The license for this repo is covered under Other. 
+* The license for this repo is covered under Other. 
 
 ## Repo
-! You can find a link to the repo at www.github.com/mcstewart76/DepartmentManagement .
+* You can find a link to the repo at www.github.com/mcstewart76/DepartmentManagement .
 
 ## Live Deployment
-! https://youtu.be/Yk1AVvq6HGA
+* https://youtu.be/Yk1AVvq6HGA
