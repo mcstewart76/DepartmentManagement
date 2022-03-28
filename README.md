@@ -7,13 +7,12 @@ A simple tool to help logistics of a department and its roles and employees. Too
 * [Installation](#installation)
 * [Usage](#usage)
 * [Contributors](#contributors)
-* [Tests](#tests)
 * [Questions](#questions)
 * [Github](#github)
 * [Email](#email)
 * [License](#license)
 * [Repo](#repo)
-
+* [Live Deployment](#Live)
 
 ## Installation
 run an npm install using node, then run node server.js 
@@ -22,13 +21,10 @@ run an npm install using node, then run node server.js
 This project requires use of a database, those using may rename database in the .env file to whichever they would like 
 
 ## Contributors
-N/A 
-
-## Tests
-N/A 
+I was the solo contributor. 
 
 ### Questions
-
+* Contact information is below
 
 ## Github
 Check out my GitHub at [https://github.com/mcstewart76/DepartmentManagement](https://github.com/mcstewart76/DepartmentManagement). 
@@ -42,5 +38,5 @@ Contact me at <a href="MAILTO:mcstewart76@gmail.com">mcstewart76@gmail.com</a> i
 ## Repo
 * You can find a link to the repo at www.github.com/mcstewart76/DepartmentManagement .
 
-## Live Deployment
+## Live Video of Deployment
 * https://youtu.be/Yk1AVvq6HGA
