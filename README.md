@@ -12,7 +12,7 @@ A simple tool to help logistics of a department and its roles and employees. Too
 * [Email](#email)
 * [License](#license)
 * [Repo](#repo)
-* [Live Deployment](#Live Video of Deployment)
+* [Video](#video)
 
 ## Installation
 run an npm install using node, then run node server.js 
@@ -38,5 +38,5 @@ Contact me at <a href="MAILTO:mcstewart76@gmail.com">mcstewart76@gmail.com</a> i
 ## Repo
 * You can find a link to the repo at www.github.com/mcstewart76/DepartmentManagement .
 
-## Live Video of Deployment
+## Video
 * https://youtu.be/Yk1AVvq6HGA
