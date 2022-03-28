@@ -12,7 +12,7 @@ A simple tool to help logistics of a department and its roles and employees. Too
 * [Email](#email)
 * [License](#license)
 * [Repo](#repo)
-* [Live Deployment](#Live)
+* [Live Deployment](#Live Video of Deployment)
 
 ## Installation
 run an npm install using node, then run node server.js 
