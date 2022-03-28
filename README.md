@@ -27,7 +27,7 @@ I was the solo contributor.
 * Contact information is below
 
 ## Github
-Check out my GitHub at [https://github.com/mcstewart76/DepartmentManagement](https://github.com/mcstewart76/DepartmentManagement). 
+Check out my GitHub at [https://github.com/mcstewart76](https://github.com/mcstewart76). 
 
 ## Email
 Contact me at <a href="MAILTO:mcstewart76@gmail.com">mcstewart76@gmail.com</a> if you have additional questions. 
