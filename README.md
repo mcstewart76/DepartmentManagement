@@ -13,6 +13,7 @@ A simple tool to help logistics of a department and its roles and employees. Too
 * [License](#license)
 * [Repo](#repo)
 * [Video](#video)
+* [Technologies](#technologies)
 
 ## Installation
 run an npm install using node, then run node server.js 
@@ -40,3 +41,9 @@ Contact me at <a href="MAILTO:mcstewart76@gmail.com">mcstewart76@gmail.com</a> i
 
 ## Video
 * https://youtu.be/Yk1AVvq6HGA
+
+## Technologies
+* Javascript
+* Node
+* SQL
+* Sequelize
