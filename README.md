@@ -47,4 +47,7 @@ Contact me at <a href="MAILTO:mcstewart76@gmail.com">mcstewart76@gmail.com</a> i
 * Node
 * SQL
 * Sequelize
-![image](https://user-images.githubusercontent.com/90533949/161198032-4c750216-4284-43e2-88b6-5c248892ce3b.png)
+
+![image](https://user-images.githubusercontent.com/90533949/161198122-8d717142-d9aa-4f18-bbd8-423bad416e60.png)
+
+
